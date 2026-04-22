@@ -1,5 +1,6 @@
-using TMPro;
+//using TMPro;
 using UnityEngine;
+
 public class CarController : MonoBehaviour
 {
     [Header("Debug")]
@@ -19,24 +20,14 @@ public class CarController : MonoBehaviour
     [SerializeField] private Transform visualBackRight;
     [SerializeField] private Transform visualBackLeft;
 
-    //[Header("UI")]
-    //[SerializeField] private Canvas canvasDamage;
-    //[SerializeField] private TMP_Text textDamage;
-    //[SerializeField] private Transform healthPoint;
-
     [Header("Settings")]
-    [SerializeField] private float motorForce = 200f;
-    [SerializeField] private float directionAngle = 45f;    //45°
-    [SerializeField] private float breakForce = 500f;
+    [SerializeField] private CarConfigurationSO carConfig;
 
     private void Update()
     {
-        inputAcceleration = Input.GetAxis("Vertical") * motorForce;
-        inputDirection = Input.GetAxis("Horizontal") * directionAngle;
-        inputBrake = Input.GetAxisRaw("Brake") * breakForce;
-
-        //if (inputAcceleration > 200)
-            //Debug.Break();
+        inputAcceleration = Input.GetAxis("Vertical") * carConfig.motorForce;
+        inputDirection = Input.GetAxis("Horizontal") * carConfig.directionAngle;
+        inputBrake = Input.GetAxisRaw("Brake") * carConfig.brakeForce;
     }
 
     private void FixedUpdate()
@@ -70,12 +61,4 @@ public class CarController : MonoBehaviour
         visual.position = pos;
         visual.rotation = rot;
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    canvasDamage.gameObject.SetActive(true);
-    //    textDamage.text = "-10";
-    //    textDamage.color = Color.red;
-    //    textDamage.transform.position = healthPoint.position;
-    //}
 }

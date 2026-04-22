@@ -227,7 +227,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 150, y: 150, z: 1}
+  m_LocalScale: {x: 375, y: 375, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -721,13 +721,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.15785465, y: -0.84035784, z: 0.395424, w: 0.3354407}
+  m_LocalPosition: {x: 30.5113, y: 53.09179, z: 41.261314}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 32.522, y: 0, z: 0}
 --- !u!1001 &1018774461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1252,7 +1252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 280c8e43b7ca61947beea008532f199e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarController
-  inputAcceleration: 1500
+  inputAcceleration: 0
   inputDirection: 0
   inputBrake: 0
   frontRight: {fileID: 1722673578}
@@ -1263,9 +1263,7 @@ MonoBehaviour:
   visualFrontLeft: {fileID: 1797845879}
   visualBackRight: {fileID: 494596048}
   visualBackLeft: {fileID: 2124490728}
-  motorForce: 200
-  directionAngle: 45
-  breakForce: 500
+  carConfig: {fileID: 11400000, guid: 07091cd3026de3c48ab97ea7ec03213a, type: 2}
 --- !u!4 &2124490728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2732721416127404842, guid: b4d3155a7bbea154b80a4615d775ceca, type: 3}
