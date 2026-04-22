@@ -31,6 +31,14 @@ public class CarController : MonoBehaviour
         rb.mass = carConfig.weight;
     }
 
+    private void Start()
+    {
+        SetupWheelFriction(frontRight);
+        SetupWheelFriction(frontLeft);
+        SetupWheelFriction(backRight);
+        SetupWheelFriction(backLeft);
+    }
+
     private void Update()
     {
         inputAcceleration = Input.GetAxis("Vertical") * carConfig.motorForce;
@@ -81,5 +89,28 @@ public class CarController : MonoBehaviour
         wheel.GetWorldPose(out Vector3 pos, out Quaternion rot);
         visual.position = pos;
         visual.rotation = rot;
+    }
+
+    private void SetupWheelFriction(WheelCollider wheel)
+    {
+        WheelFrictionCurve forward = wheel.forwardFriction;
+        WheelFrictionCurve sideways = wheel.sidewaysFriction;
+
+        // TRACCIÓN (forward)
+        forward.extremumSlip = 0.4f;
+        forward.extremumValue = 1.2f;
+        forward.asymptoteSlip = 0.8f;
+        forward.asymptoteValue = 0.9f;
+        forward.stiffness = 1.5f;
+
+        // AGARRE LATERAL (clave anti-derrape)
+        sideways.extremumSlip = 0.2f;
+        sideways.extremumValue = 1.5f;
+        sideways.asymptoteSlip = 0.5f;
+        sideways.asymptoteValue = 1.2f;
+        sideways.stiffness = 2.0f;
+
+        wheel.forwardFriction = forward;
+        wheel.sidewaysFriction = sideways;
     }
 }
