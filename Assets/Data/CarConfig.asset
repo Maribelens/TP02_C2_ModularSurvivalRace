@@ -18,6 +18,6 @@ MonoBehaviour:
   maxSpeed: 50
   weight: 1500
   maxHealth: 100
-  maxFuel: 1
-  idleConsumption: 4
-  accelerationConsumption: 10
+  maxFuel: 100
+  idleConsumption: 1
+  accelerationConsumption: 4

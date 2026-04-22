@@ -17,6 +17,6 @@ public class CarConfigurationSO : ScriptableObject
 
     [Header("Fuel")]
     public float maxFuel = 100f;
-    public float idleConsumption = 0.5f;    
-    public float accelerationConsumption = 2f;
+    public float idleConsumption = 0.01f;    
+    public float accelerationConsumption = 0.05f;
 }

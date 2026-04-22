@@ -5,6 +5,8 @@ public class CarDamage : MonoBehaviour
     [SerializeField] private HealthSystem healthSystem;
     [SerializeField] private float damageMultiplier = 0.5f;
     [SerializeField] private float minImpactThreshold = 1f;
+    [SerializeField] private DamageTextPool damageTextPool;
+
 
     private Rigidbody rb;
 
@@ -26,6 +28,12 @@ public class CarDamage : MonoBehaviour
             float damage = impactForce * damageMultiplier;
 
             healthSystem.TakeDamage(damage);
+
+            if (collision.contacts.Length > 0 && damageTextPool != null)
+            {
+                Vector3 hitPoint = collision.contacts[0].point;
+                damageTextPool.ShowDamage(hitPoint, Mathf.RoundToInt(damage));
+            }
             Debug.Log("Collision!");
         }
     }
