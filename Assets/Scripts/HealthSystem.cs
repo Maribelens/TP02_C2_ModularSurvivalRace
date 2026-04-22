@@ -46,6 +46,11 @@ public class HealthSystem : MonoBehaviour
 
         currentHealth += amount;
 
+        if (currentHealth > config.maxHealth)
+        {
+            currentHealth = config.maxHealth;
+        }
+
         OnHealthChanged?.Invoke(currentHealth, config.maxHealth);
     }
 }

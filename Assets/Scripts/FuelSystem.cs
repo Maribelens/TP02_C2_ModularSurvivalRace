@@ -42,6 +42,11 @@ public class FuelSystem : MonoBehaviour
 
         currentFuel += amount;
 
+        if (currentFuel > config.maxFuel)
+        {
+            currentFuel = config.maxFuel;
+        }
+
         OnFuelChanged?.Invoke(currentFuel, config.maxFuel);
     }
 }
