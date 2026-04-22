@@ -52,8 +52,11 @@ public class CarController : MonoBehaviour
 
         //Direccion
         // Factor: 1 en baja velocidad, menor en alta
-        frontRight.steerAngle = inputDirection;
-        frontLeft.steerAngle = inputDirection;
+        float steerFactor = Mathf.Clamp01(1 - (speed / carConfig.maxSpeed));
+
+        float finalSteer = inputDirection * steerFactor;
+        frontRight.steerAngle = finalSteer;
+        frontLeft.steerAngle = finalSteer;
 
         //Sincronizacion visual
         SyncWheel(frontRight, visualFrontRight);
