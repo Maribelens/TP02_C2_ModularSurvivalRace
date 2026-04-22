@@ -12,7 +12,11 @@ public class CarConfigurationSO : ScriptableObject
     public float maxSpeed = 100f;
     public float weight = 1500f;
 
-    [Header("Health & Fuel")]
+    [Header("Health")]
     public float maxHealth = 100f;
+
+    [Header("Fuel")]
     public float maxFuel = 100f;
+    public float idleConsumption = 0.5f;    
+    public float accelerationConsumption = 2f;
 }

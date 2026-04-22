@@ -1,4 +1,5 @@
 //using TMPro;
+using System;
 using UnityEngine;
 
 public class CarController : MonoBehaviour
@@ -22,6 +23,7 @@ public class CarController : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private CarConfigurationSO carConfig;
+    [SerializeField] private FuelSystem fuelSystem;
 
     private Rigidbody rb;
 
@@ -29,10 +31,13 @@ public class CarController : MonoBehaviour
     {
         rb = GetComponentInParent<Rigidbody>();
         rb.mass = carConfig.weight;
+        fuelSystem = GetComponent<FuelSystem>();
     }
 
     private void Start()
     {
+        fuelSystem.OnFuelEmpty += HandleNoFuel;
+
         SetupWheelFriction(frontRight);
         SetupWheelFriction(frontLeft);
         SetupWheelFriction(backRight);
@@ -112,5 +117,10 @@ public class CarController : MonoBehaviour
 
         wheel.forwardFriction = forward;
         wheel.sidewaysFriction = sideways;
+    }
+
+    private void HandleNoFuel()
+    {
+        inputAcceleration = 0;
     }
 }
