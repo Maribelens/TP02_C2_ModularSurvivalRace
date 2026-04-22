@@ -23,6 +23,14 @@ public class CarController : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private CarConfigurationSO carConfig;
 
+    private Rigidbody rb;
+
+    private void Awake()
+    {
+        rb = GetComponentInParent<Rigidbody>();
+        rb.mass = carConfig.weight;
+    }
+
     private void Update()
     {
         inputAcceleration = Input.GetAxis("Vertical") * carConfig.motorForce;
@@ -33,12 +41,17 @@ public class CarController : MonoBehaviour
     private void FixedUpdate()
     {
         //Traccion en las 4 ruedas (Aceleracion)
-        frontRight.motorTorque = inputAcceleration;
-        frontLeft.motorTorque = inputAcceleration;
-        backRight.motorTorque = inputAcceleration;
-        backLeft.motorTorque = inputAcceleration;
+        float speed = GetSpeed();
+        float speedFactor = Mathf.Clamp01(1 - (speed / carConfig.maxSpeed));
+        float finalMotor = inputAcceleration * speedFactor;
+
+        frontRight.motorTorque = finalMotor;
+        frontLeft.motorTorque = finalMotor;
+        backRight.motorTorque = finalMotor;
+        backLeft.motorTorque = finalMotor;
 
         //Direccion
+        // Factor: 1 en baja velocidad, menor en alta
         frontRight.steerAngle = inputDirection;
         frontLeft.steerAngle = inputDirection;
 
@@ -53,6 +66,11 @@ public class CarController : MonoBehaviour
         frontLeft.brakeTorque = inputBrake;
         backRight.brakeTorque = inputBrake;
         backLeft.brakeTorque = inputBrake;
+    }
+
+    private float GetSpeed()
+    {
+        return rb.linearVelocity.magnitude * 3.6f;
     }
 
     private void SyncWheel(WheelCollider wheel, Transform visual)

@@ -9,7 +9,7 @@ public class CarConfigurationSO : ScriptableObject
     public float brakeForce = 500f;
 
     [Header("Stats")]
-    public float maxSpeed = 50f;
+    public float maxSpeed = 100f;
     public float weight = 1500f;
 
     [Header("Health & Fuel")]
