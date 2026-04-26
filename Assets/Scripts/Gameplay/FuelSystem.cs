@@ -8,6 +8,8 @@ public class FuelSystem : MonoBehaviour
 
     public float CurrentFuel => currentFuel;
 
+    private bool isEmpty;
+
     public event Action<float, float> OnFuelChanged;
     public event Action OnFuelEmpty;
 
@@ -23,7 +25,7 @@ public class FuelSystem : MonoBehaviour
 
     public void Consume(float amount)
     {
-        if (amount <= 0) return;
+        if (amount <= 0 || isEmpty) return;
 
         currentFuel -= amount;
 
@@ -31,8 +33,10 @@ public class FuelSystem : MonoBehaviour
 
         if (currentFuel <= 0)
         {
+            isEmpty = true;
             OnFuelEmpty?.Invoke();
         }
+
         Debug.Log("DoConsume", gameObject);
     }
 

@@ -9,15 +9,6 @@ public class CarCamera : MonoBehaviour
     private float smoothSpeed = 5f;
     private bool isFirstPerson = false;
 
-    private void Awake()
-    {
-        Transform[] points = GetComponentsInChildren<Transform>();
-
-        firstPersonPoint = points[1];
-        thirdPersonPoint = points[2];
-        cameraTransform = points[3];
-    }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))

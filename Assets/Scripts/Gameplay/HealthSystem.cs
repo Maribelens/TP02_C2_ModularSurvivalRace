@@ -5,10 +5,12 @@ public class HealthSystem : MonoBehaviour
 {
     public bool isInvulnerable = false;
     [SerializeField] private CarConfigurationSO config;
-    [SerializeField] private float currentHealth;
-    //[SerializeField] private float maxHealth;
 
+    [SerializeField] private float currentHealth;
     public float CurrentHealth => currentHealth;
+
+    [SerializeField] private bool isDead;
+    public bool IsDead => isDead;
 
     public event Action<float, float> OnHealthChanged;
     public event Action OnDeath;
@@ -26,7 +28,7 @@ public class HealthSystem : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        if (amount <= 0 || isInvulnerable) return;
+        if (amount <= 0 || isInvulnerable || isDead) return;
 
         currentHealth -= amount;
 
@@ -34,6 +36,7 @@ public class HealthSystem : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            isDead = true;
             OnDeath?.Invoke();
         }
 

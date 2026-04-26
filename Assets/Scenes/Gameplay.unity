@@ -906,7 +906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarHUD
   health: {fileID: 2101777529}
   fuel: {fileID: 2101777530}
-  speedProvider: {fileID: 2073139116}
+  speedProvider: {fileID: 2073139114}
   healthBar: {fileID: 1351712890}
   fuelBar: {fileID: 782388833}
   healthText: {fileID: 85304837}
@@ -2697,9 +2697,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2073139112}
   - component: {fileID: 2073139113}
-  - component: {fileID: 2073139114}
-  - component: {fileID: 2073139115}
   - component: {fileID: 2073139116}
+  - component: {fileID: 2073139115}
+  - component: {fileID: 2073139114}
   m_Layer: 0
   m_Name: Car
   m_TagString: Untagged
@@ -2761,13 +2761,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2073139111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88bd97d1b19bcc94abe09f862c075b70, type: 3}
+  m_Script: {fileID: 11500000, guid: 569fd5455e5fd1d4cba24a380bd47ad3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarDamage
-  healthSystem: {fileID: 0}
-  damageMultiplier: 0.5
-  minImpactThreshold: 5
-  damageTextPool: {fileID: 914119380}
+  m_EditorClassIdentifier: Assembly-CSharp::SpeedProvider
+  smoothing: 5
 --- !u!114 &2073139115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2791,10 +2788,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2073139111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2deb43de68b53d4bacb42361b5e4004, type: 3}
+  m_Script: {fileID: 11500000, guid: 88bd97d1b19bcc94abe09f862c075b70, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpeedProvider
-  smoothing: 5
+  m_EditorClassIdentifier: Assembly-CSharp::CarDamage
+  healthSystem: {fileID: 0}
+  damageMultiplier: 0.5
+  minImpactThreshold: 1
+  damageTextPool: {fileID: 914119380}
 --- !u!1001 &2090252321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2869,9 +2869,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2101777527}
-  - component: {fileID: 2101777528}
+  - component: {fileID: 2101777531}
   - component: {fileID: 2101777529}
   - component: {fileID: 2101777530}
+  - component: {fileID: 2101777532}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -2894,31 +2895,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2073139112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2101777528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2101777526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 280c8e43b7ca61947beea008532f199e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarController
-  inputAcceleration: 0
-  inputDirection: 0
-  inputBrake: 0
-  frontRight: {fileID: 1722673578}
-  frontLeft: {fileID: 1377775368}
-  backRight: {fileID: 425141818}
-  backLeft: {fileID: 201536923}
-  visualFrontRight: {fileID: 585771997}
-  visualFrontLeft: {fileID: 1797845879}
-  visualBackRight: {fileID: 494596048}
-  visualBackLeft: {fileID: 2124490728}
-  carConfig: {fileID: 11400000, guid: 07091cd3026de3c48ab97ea7ec03213a, type: 2}
-  fuelSystem: {fileID: 0}
 --- !u!114 &2101777529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2934,6 +2910,7 @@ MonoBehaviour:
   isInvulnerable: 0
   config: {fileID: 11400000, guid: 07091cd3026de3c48ab97ea7ec03213a, type: 2}
   currentHealth: 0
+  isDead: 0
 --- !u!114 &2101777530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2948,6 +2925,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FuelSystem
   config: {fileID: 11400000, guid: 07091cd3026de3c48ab97ea7ec03213a, type: 2}
   currentFuel: 0
+--- !u!114 &2101777531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101777526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6155a1689aae30488c910c28108fd8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarController
+  frontRight: {fileID: 1722673578}
+  frontLeft: {fileID: 1377775368}
+  backRight: {fileID: 425141818}
+  backLeft: {fileID: 201536923}
+  visualFrontRight: {fileID: 585771997}
+  visualFrontLeft: {fileID: 1797845879}
+  visualBackRight: {fileID: 494596048}
+  visualBackLeft: {fileID: 2124490728}
+  carConfig: {fileID: 11400000, guid: 07091cd3026de3c48ab97ea7ec03213a, type: 2}
+  fuelSystem: {fileID: 0}
+  carInput: {fileID: 0}
+--- !u!114 &2101777532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101777526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513b7220c2051534a9fd472140153570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarInput
 --- !u!4 &2124490728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2732721416127404842, guid: b4d3155a7bbea154b80a4615d775ceca, type: 3}
