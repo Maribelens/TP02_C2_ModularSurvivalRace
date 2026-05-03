@@ -29,6 +29,7 @@ public class CarController : MonoBehaviour
         rb = GetComponentInParent<Rigidbody>();
         if (rb != null)
         rb.mass = carConfig.weight;
+        rb.centerOfMass = new Vector3(0, -0.25f, 0);
 
         if(fuelSystem == null)
         fuelSystem = GetComponent<FuelSystem>();
@@ -67,14 +68,17 @@ public class CarController : MonoBehaviour
         float finalMotor = motorForce * speedFactor;
 
         //Reducir giro en velocidad alta
-        float steerFactor = Mathf.Clamp01(1 - (speed / carConfig.maxSpeed));
+        //float steerFactor = Mathf.Clamp01(1 - (speed / carConfig.maxSpeed));
+        float steerFactor = Mathf.Lerp(1f, 0.3f, speed / carConfig.maxSpeed);
         float finalSteer = steerAngle * steerFactor;
 
         //Motor
         frontRight.motorTorque = finalMotor;
         frontLeft.motorTorque = finalMotor;
-        backRight.motorTorque = finalMotor;
-        backLeft.motorTorque = finalMotor;
+        backRight.motorTorque = 0;
+        backLeft.motorTorque = 0;
+        //backRight.motorTorque = finalMotor;
+        //backLeft.motorTorque = finalMotor;
 
         //Direccion
         frontRight.steerAngle = finalSteer;
@@ -122,7 +126,7 @@ public class CarController : MonoBehaviour
         sideways.extremumValue = 1.5f;
         sideways.asymptoteSlip = 0.5f;
         sideways.asymptoteValue = 1.2f;
-        sideways.stiffness = 2.0f;
+        sideways.stiffness = 2.8f;
 
         wheel.forwardFriction = forward;
         wheel.sidewaysFriction = sideways;

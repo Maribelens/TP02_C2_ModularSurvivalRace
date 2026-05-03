@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RepairZone : MonoBehaviour
 {
-    [SerializeField] private float repairRate = 10f; // vida por segundo
+    [SerializeField] private float repairRate = 1f; // vida por segundo
     private void OnTriggerStay(Collider other)
     {
         Rigidbody rb = other.attachedRigidbody;

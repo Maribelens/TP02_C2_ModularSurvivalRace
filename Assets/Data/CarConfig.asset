@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarConfigurationSO
   motorForce: 1000
   directionAngle: 45
-  brakeForce: 3000
+  brakeForce: 2000
   maxSpeed: 50
-  weight: 1500
+  weight: 700
   maxHealth: 100
-  maxFuel: 100
+  maxFuel: 300
   idleConsumption: 1
   accelerationConsumption: 4
